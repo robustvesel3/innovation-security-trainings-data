@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovation Security Training Data</title>
+    <link rel="icon" href="resources/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div id="loading-screen">
+        <div class="loader-content">
+            <h2>Loading</h2>
+            <p id="loading-status">Reading training logs...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <div class="app-container" style="display: none;" id="main-app">
+        <aside class="sidebar">
+            <div class="settings-group">
+                <h3>General Settings</h3>
+                <label>Timezone:</label>
+                <select id="tz-select">
+                    <option value="local" selected>Local Time</option>
+                    <option value="UTC" selected>UTC</option>
+                </select>
+
+                <label>Analytics Scope:</label>
+                <select id="timeframe-select">
+                    <option value="Last 7 Days">Last 7 Days</option>
+                    <option value="Last 30 Days">Last 30 Days</option>
+                    <option value="Last 90 Days">Last 90 Days (3 Months)</option>
+                    <option value="Last 180 Days">Last 180 Days (6 Months)</option>
+                    <option value="All Time" selected>All Time</option>
+                </select>
+
+                <label>Timeline Year:</label>
+                <div class="year-controls">
+                    <button id="prev-year">◀</button>
+                    <span id="current-year"></span>
+                    <button id="next-year">▶</button>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <h3>Day Filter</h3>
+                <div class="day-grid">
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Monday" checked> Mon</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Tuesday" checked> Tue</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Wednesday" checked> Wed</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Thursday" checked> Thu</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Friday" checked> Fri</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Saturday" checked> Sat</label>
+                    <label class="day-chip"><input type="checkbox" class="day-cb" value="Sunday" checked> Sun</label>
+                </div>
+            </div>
+
+            <div class="settings-group filter-group">
+                <h3>Trainer Filter</h3>
+                <input type="text" id="trainer-search" placeholder="Search trainers...">
+                <label class="checkbox-label select-all-label">
+                    <input type="checkbox" id="select-all-trainers" checked> Select / Deselect All
+                </label>
+                <div class="trainer-list" id="trainer-list">
+                </div>
+            </div>
+
+            <div class="settings-group actions-group">
+                <button class="action-btn" id="btn-export-png">Export Graphs as PNG</button>
+                <button class="action-btn" id="btn-export-csv">Export Filtered Data (CSV)</button>
+            </div>
+        </aside>
+
+        <main class="main-content-wrapper">
+            <div class="main-content">
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="tab-charts">Visual Charts</button>
+                    <button class="tab-btn" data-target="tab-stats">Analytics & Stats</button>
+                </div>
+
+                <div class="tab-content active" id="tab-charts">
+                    <div class="chart-grid">
+                        <div class="chart-box"><canvas id="weeklyChart"></canvas></div>
+                        <div class="chart-box"><canvas id="hourlyChart"></canvas></div>
+                        <div class="chart-box full-width"><canvas id="yearlyChart"></canvas></div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="tab-stats">
+                    <div class="stats-card">
+                        <h3>Optimal Training Windows</h3>
+                        <p><strong>Best Time Window to Join:</strong> <br><span id="stat-peak-time"
+                                class="highlight">--</span></p>
+                        <p><strong>Lowest Activity:</strong> <br><span id="stat-drought-time">--</span></p>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Top Trainer Leaderboard</h3>
+                        <div id="stat-leaderboard">--</div>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Activity Pacing & Days</h3>
+                        <p><strong>Peak Activity Day:</strong> <span id="stat-busiest-day">--</span></p>
+                        <p><strong>Hosting Velocity:</strong> <span id="stat-weekly-avg">--</span></p>
+                    </div>
+
+                    <div class="stats-card">
+                        <h3>Filter Summary</h3>
+                        <p id="stat-total-filtered">--</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="status-bar" id="status-bar">Ready</footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
