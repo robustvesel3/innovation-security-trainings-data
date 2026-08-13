@@ -15,7 +15,7 @@ const selectAllCheckbox = document.getElementById('select-all-trainers');
 const statusBar = document.getElementById('status-bar');
 
 function populateTimezones() {
-    tzSelect.innerHTML = '<option value="local">Local Browser Time</option><option value="UTC" selected>UTC</option>';
+    tzSelect.innerHTML = '<option value="local" selected>Local Browser Time</option><option value="UTC">UTC</option>';
     if (typeof Intl.supportedValuesOf === 'function') {
         Intl.supportedValuesOf('timeZone').forEach(tz => {
             const opt = document.createElement('option');
